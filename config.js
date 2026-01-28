@@ -1,30 +1,29 @@
 // ==========================================
-// 论文列表配置文件
+// Publications Configuration
 // ==========================================
-// 格式说明：
-// title:  列表显示的标题
-// file:   papers文件夹下的文件名 (例如 "my-paper.pdf")
-// code:   GitHub 仓库链接 (如果没有代码，留空 "" 即可，按钮会自动隐藏)
+// title:  Paper title to display
+// file:   Filename in the 'papers' folder (e.g., "my-paper.pdf")
+// code:   GitHub URL (leave empty "" if no code is available)
 // ==========================================
 
 const paperList = [
     {
-        title: "Variational Causal-Graph Enhanced Network for Robust Forecasting",
+        title: "Variational Causal-Graph Enhanced Network for Robust Fashion Popularity Forecasting",
         file: "paper1.pdf", 
         code: "https://github.com/your-username/project-1"
     },
     {
-        title: "Adaptive Gradient-Field Poisson Blending for Video Synthesis",
+        title: "Adaptive Gradient-Field Poisson Blending for High-Fidelity Facial Video Synthesis",
         file: "paper2.pdf",
         code: "https://github.com/your-username/project-2"
     },
     {
-        title: "Distributed Knowledge-Graph Augmented LLM Microservices",
+        title: "Penetrative Cross-Domain Financial Risk Monitoring via Distributed Knowledge-Graph",
         file: "paper3.pdf", 
-        code: "" // 没有代码，留空
+        code: "" // Leave empty to hide the Code button
     },
     {
-        title: "Analyzing Geometric Parameters in Inclined Enclosures",
+        title: "Analyzing Geometric Parameters in Inclined Enclosures Using Artificial Neural Networks",
         file: "paper4.pdf",
         code: "https://github.com/your-username/project-4"
     }
