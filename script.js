@@ -68,9 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/**
- * Function to render paper list from config.js
- */
+// Function to render paper list from config.js
 function renderPublications() {
     const listContainer = document.getElementById('paper-list-container');
     
@@ -154,3 +152,4 @@ function renderPublications() {
         observer.observe(paperDiv);
     });
 }
+
