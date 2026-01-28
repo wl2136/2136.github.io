@@ -1,6 +1,11 @@
-// ============================================
-// 1. Navigation & Scroll Logic (Existing)
-// ============================================
+/**
+ * ===================================================================================
+ * MAIN LOGIC SCRIPT
+ * Handles animations, smooth scrolling, and dynamic content rendering.
+ * ===================================================================================
+ */
+
+// --- 1. Navigation & Scroll Interactions ---
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -19,15 +24,25 @@ window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 200) current = section.getAttribute('id');
+        if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
     });
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
     });
 });
 
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+// --- 2. Animations (Intersection Observer) ---
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -37,54 +52,56 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// ============================================
-// 2. Dynamic Content Rendering (New)
-// ============================================
+function observeElements(selector) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// --- 3. Dynamic Content Rendering ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Check Config
-    if (typeof siteConfig === 'undefined') {
-        console.error("Config file not loaded!");
-        return;
-    }
-
-    // 执行所有渲染函数
+    // Render all dynamic sections
     renderAbout();
     renderResearchFocus();
     renderPublications();
     renderCollaboration();
     renderTeam();
 
-    // Attach Observer to all newly created animated elements
-    const animatedClasses = '.research-card, .activity-item, .collab-item, .paper-item, .team-member';
-    setTimeout(() => {
-        document.querySelectorAll(animatedClasses).forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    }, 100); // Slight delay to ensure DOM is ready
+    // Start animations for newly created elements
+    // We observe typical card classes
+    observeElements('.research-card, .activity-item, .collab-item, .team-member, .paper-item');
 });
 
-// --- Render Functions ---
 
+// A. Render About Section
 function renderAbout() {
-    const container = document.getElementById('about-container');
-    container.innerHTML = '';
-    siteConfig.about.forEach(item => {
-        const p = document.createElement('p');
-        p.innerHTML = item.text; // Allow HTML
-        if (item.isLead) p.className = 'lead';
-        container.appendChild(p);
-    });
+    if (typeof aboutConfig === 'undefined') return;
+    
+    // Inject Title if needed (Optional, currently hardcoded in HTML as well)
+    const container = document.getElementById('about-text-container');
+    if (!container) return;
+    
+    // Inject Paragraphs
+    if (aboutConfig.paragraphs && aboutConfig.paragraphs.length > 0) {
+        aboutConfig.paragraphs.forEach(text => {
+            const p = document.createElement('p');
+            p.innerHTML = text; // innerHTML allows <strong> tags
+            container.appendChild(p);
+        });
+    }
 }
 
+// B. Render Research Focus
 function renderResearchFocus() {
-    const container = document.getElementById('research-container');
-    container.innerHTML = '';
-    siteConfig.researchFocus.forEach(item => {
+    const container = document.getElementById('research-grid');
+    if (!container || typeof researchFocusList === 'undefined') return;
+
+    researchFocusList.forEach(item => {
         const card = document.createElement('div');
         card.className = 'research-card';
         card.innerHTML = `
@@ -96,101 +113,123 @@ function renderResearchFocus() {
     });
 }
 
+// C. Render Publications (Updated with Date)
 function renderPublications() {
     const container = document.getElementById('paper-list-container');
-    container.innerHTML = '';
-    
-    // Sort by date (Newest first) - Optional
-    // siteConfig.publications.sort((a, b) => new Date(b.date) - new Date(a.date));
+    if (!container || typeof paperList === 'undefined') return;
 
-    siteConfig.publications.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'paper-item';
+    container.innerHTML = ''; // Clear loading text
+    if (paperList.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color: var(--text-light);">No publications available.</p>';
+        return;
+    }
 
-        // Title and Date wrapper
+    paperList.forEach(item => {
+        const paperDiv = document.createElement('div');
+        paperDiv.className = 'paper-item';
+
+        // Left side: Text info (Title + Date)
         const infoDiv = document.createElement('div');
-        infoDiv.style.flex = '1';
+        infoDiv.className = 'paper-info';
         
-        const titleSpan = document.createElement('h4'); // Changed to h4 for better hierarchy
+        // Date Element
+        if (item.date) {
+            const dateSpan = document.createElement('div');
+            dateSpan.className = 'paper-date';
+            dateSpan.textContent = item.date;
+            infoDiv.appendChild(dateSpan);
+        }
+        
+        // Title Element
+        const titleSpan = document.createElement('div');
         titleSpan.className = 'paper-title';
         titleSpan.textContent = item.title;
-        titleSpan.style.marginBottom = '5px';
-
-        // ✅ 新增：日期显示
-        const dateSpan = document.createElement('div');
-        dateSpan.className = 'paper-date';
-        dateSpan.textContent = `📅 Published: ${item.date}`;
-
         infoDiv.appendChild(titleSpan);
-        infoDiv.appendChild(dateSpan);
 
-        // Buttons
+        // Right side: Buttons
         const btnGroup = document.createElement('div');
         btnGroup.className = 'paper-btn-group';
 
         if (item.file) {
-            const btn = document.createElement('a');
-            btn.href = item.file;
-            btn.className = 'btn-sm btn-paper';
-            btn.textContent = '📄 Paper';
-            btn.target = '_blank';
-            btnGroup.appendChild(btn);
-        }
-        if (item.code) {
-            const btn = document.createElement('a');
-            btn.href = item.code;
-            btn.className = 'btn-sm btn-code';
-            btn.textContent = '💻 Code';
-            btn.target = '_blank';
-            btnGroup.appendChild(btn);
+            const paperBtn = document.createElement('a');
+            paperBtn.href = item.file;
+            paperBtn.className = 'btn-sm btn-paper';
+            paperBtn.textContent = '📄 Paper';
+            paperBtn.target = '_blank';
+            btnGroup.appendChild(paperBtn);
         }
 
-        div.appendChild(infoDiv);
-        div.appendChild(btnGroup);
-        container.appendChild(div);
+        if (item.code) {
+            const codeBtn = document.createElement('a');
+            codeBtn.href = item.code;
+            codeBtn.className = 'btn-sm btn-code';
+            codeBtn.textContent = '💻 Code';
+            codeBtn.target = '_blank';
+            btnGroup.appendChild(codeBtn);
+        }
+
+        paperDiv.appendChild(infoDiv);
+        paperDiv.appendChild(btnGroup);
+        container.appendChild(paperDiv);
     });
 }
 
+// D. Render Collaboration
 function renderCollaboration() {
-    const container = document.getElementById('collaboration-container');
-    container.innerHTML = '';
-    siteConfig.collaboration.forEach(item => {
-        const div = document.createElement('div');
-        div.className = `collab-item ${item.buttonLink ? 'clickable-card' : ''}`;
+    const container = document.getElementById('collaboration-grid');
+    if (!container || typeof collaborationList === 'undefined') return;
+
+    collaborationList.forEach(item => {
+        const colItem = document.createElement('div');
+        colItem.className = 'collab-item';
         
-        // If clickable, add onclick
-        if (item.buttonLink) {
-            div.onclick = () => {
-                const targetId = item.buttonLink.replace('#', '');
-                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+        let buttonHtml = '';
+        if (item.actionBtn) {
+            // If there's an action button configured
+            colItem.classList.add('clickable-card'); // Optional style
+            buttonHtml = `<a href="${item.actionBtn.link}" class="btn btn-secondary" style="margin-top:1rem; display:inline-block;">${item.actionBtn.text}</a>`;
+            
+            // Allow whole card click
+            colItem.onclick = () => {
+                // Check if link is anchor
+                if(item.actionBtn.link.startsWith('#')) {
+                   const target = document.querySelector(item.actionBtn.link);
+                   if(target) target.scrollIntoView({behavior: 'smooth'});
+                } else {
+                   window.location.href = item.actionBtn.link;
+                }
             };
         }
 
-        let html = `<h3>${item.title}</h3><p>${item.description}</p>`;
-        if (item.buttonText && item.buttonLink) {
-            html += `<a href="${item.buttonLink}" class="btn btn-secondary">${item.buttonText}</a>`;
-        }
-        div.innerHTML = html;
-        container.appendChild(div);
+        colItem.innerHTML = `
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            ${buttonHtml}
+        `;
+        container.appendChild(colItem);
     });
 }
 
+// E. Render Team
 function renderTeam() {
-    const container = document.getElementById('team-container');
-    container.innerHTML = '';
-    siteConfig.team.forEach(member => {
-        const div = document.createElement('div');
-        div.className = 'team-member';
+    const container = document.getElementById('team-grid');
+    if (!container || typeof teamMembers === 'undefined') return;
+
+    teamMembers.forEach(member => {
+        const memberDiv = document.createElement('div');
+        memberDiv.className = 'team-member';
         
-        let deptHtml = member.department ? `<p class="member-department">${member.department}</p>` : '';
-        
-        div.innerHTML = `
-            <div class="member-icon">${member.icon}</div>
+        const departmentHtml = member.department 
+            ? `<p class="member-department">${member.department}</p>` 
+            : '';
+
+        memberDiv.innerHTML = `
+            <div class="member-icon">👤</div>
             <h3>${member.name}</h3>
             <p class="member-role">${member.role}</p>
-            ${deptHtml}
+            ${departmentHtml}
             <p class="member-location">📍 ${member.location}</p>
         `;
-        container.appendChild(div);
+        container.appendChild(memberDiv);
     });
 }
