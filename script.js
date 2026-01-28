@@ -52,7 +52,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe all cards and items
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Existing Animation Logic
-    const animatedElements = document.querySelectorAll('.research-card, .activity-item, .collab-item, .paper-item'); // Added .paper-item here
+    const animatedElements = document.querySelectorAll('.research-card, .activity-item, .collab-item');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 2. 【新增】 Render Publications from config.js
+    // 2. Render Publications from config.js
     renderPublications();
 });
 
@@ -107,7 +107,10 @@ function renderPublications() {
         // Paper Button
         if (item.file) {
             const paperBtn = document.createElement('a');
-            paperBtn.href = `papers/${item.file}`; // Path relative to index.html
+            
+            // 【核心修改】直接使用配置中的链接，不再自动加 "papers/" 前缀
+            paperBtn.href = item.file; 
+            
             paperBtn.className = 'btn-sm btn-paper';
             paperBtn.textContent = '📄 Paper';
             paperBtn.target = '_blank';
