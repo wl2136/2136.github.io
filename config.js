@@ -1,32 +1,37 @@
 // ==========================================
 // Publications Configuration
 // ==========================================
-// title:  Paper title to display
-// file:   Direct link to the file. 
-//         - If local: "papers/filename.pdf"
-//         - If remote: "https://arxiv.org/pdf/xxxx.pdf"
-// code:   GitHub URL (leave empty "" if no code is available)
+// title:  The title of the paper/project.
+// date:   Publication date (e.g., "2024-01-15").
+// file:   Direct link to the file.
+//         - Local: "papers/filename.pdf"
+//         - Remote: "https://arxiv.org/pdf/xxxx.pdf"
+// code:   GitHub URL (leave empty "" if not available).
 // ==========================================
 
 const paperList = [
     {
-        title: "Variational Causal-Graph Enhanced Network (Local File Example)",
-        file: "papers/paper1.pdf",  // ✅ 写法1：本地文件 (记得自己带上文件夹路径)
+        title: "Variational Causal-Graph Enhanced Network for Robust Forecasting",
+        date: "2026-01-15",
+        file: "papers/paper1.pdf", 
         code: "https://github.com/your-username/project-1"
     },
     {
-        title: "Adaptive Gradient-Field Poisson Blending (Remote Link Example)",
-        file: "https://arxiv.org/pdf/2101.00001.pdf", // ✅ 写法2：直接填外部链接
+        title: "Adaptive Gradient-Field Poisson Blending for Video Synthesis",
+        date: "2025-12-20",
+        file: "https://arxiv.org/pdf/2101.00001.pdf", 
         code: "https://github.com/your-username/project-2"
     },
     {
         title: "Penetrative Cross-Domain Financial Risk Monitoring",
+        date: "2025-11-05",
         file: "papers/paper3.pdf", 
-        code: "" // Leave empty to hide the Code button
+        code: "" // Leave empty to hide the button
     },
     {
         title: "Analyzing Geometric Parameters in Inclined Enclosures",
-        file: "https://drive.google.com/file/d/xxxx/view", // ✅ 写法3：网盘链接
+        date: "2025-10-10",
+        file: "https://example.com/remote-file.pdf",
         code: "https://github.com/your-username/project-4"
     }
 ];

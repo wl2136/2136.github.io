@@ -1,3 +1,7 @@
+// ==========================================
+// Navigation & Animation Logic
+// ==========================================
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -20,7 +24,6 @@ window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (window.pageYOffset >= sectionTop - 200) {
             current = section.getAttribute('id');
         }
@@ -34,7 +37,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Add fade-in animation on scroll
+// Intersection Observer for fade-in animation
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -49,10 +52,10 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all cards and items
+// Initialize animations on load
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Existing Animation Logic
-    const animatedElements = document.querySelectorAll('.research-card, .activity-item, .collab-item');
+    // 1. Observe static elements
+    const animatedElements = document.querySelectorAll('.research-card, .activity-item, .collab-item, .team-member');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -60,18 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 2. Render Publications from config.js
+    // 2. Render and observe publication list
     renderPublications();
 });
 
 
-/**
- * Function to render paper list from config.js
- */
+// Function to render paper list from config.js
 function renderPublications() {
     const listContainer = document.getElementById('paper-list-container');
     
-    // Check if config is loaded
+    // Safety check: ensure config is loaded
     if (typeof paperList === 'undefined' || !paperList) {
         listContainer.innerHTML = '<p style="text-align:center; color:red;">Error: config.js not loaded.</p>';
         return;
@@ -82,35 +83,48 @@ function renderPublications() {
         return;
     }
 
-    // Clear loading text
+    // Clear loading placeholder
     listContainer.innerHTML = '';
 
-    paperList.forEach((item, index) => {
-        // Create Item Container
+    paperList.forEach((item) => {
+        // Create Main Card
         const paperDiv = document.createElement('div');
         paperDiv.className = 'paper-item';
         
-        // Add animation styles (to match the observer logic above)
+        // Apply animation styles dynamically
         paperDiv.style.opacity = '0';
         paperDiv.style.transform = 'translateY(20px)';
         paperDiv.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 
+        // --- Left Side: Text Content (Title + Date) ---
+        const textDiv = document.createElement('div');
+        textDiv.className = 'paper-text-content';
+
         // Title
-        const titleSpan = document.createElement('span');
+        const titleSpan = document.createElement('div'); // Changed to div for block display
         titleSpan.className = 'paper-title';
         titleSpan.textContent = item.title;
 
-        // Button Group
+        // Date (New Feature)
+        if (item.date) {
+            const dateSpan = document.createElement('div');
+            dateSpan.className = 'paper-date';
+            dateSpan.innerHTML = `📅 ${item.date}`; // Add a small icon
+            textDiv.appendChild(dateSpan);
+        }
+        
+        // Append Title (and Date) to text container
+        textDiv.prepend(titleSpan); 
+
+
+        // --- Right Side: Button Group ---
         const btnGroup = document.createElement('div');
         btnGroup.className = 'paper-btn-group';
 
         // Paper Button
         if (item.file) {
             const paperBtn = document.createElement('a');
-            
-            // 【核心修改】直接使用配置中的链接，不再自动加 "papers/" 前缀
-            paperBtn.href = item.file; 
-            
+            paperBtn.href = item.file; // Direct link from config
             paperBtn.className = 'btn-sm btn-paper';
             paperBtn.textContent = '📄 Paper';
             paperBtn.target = '_blank';
@@ -127,12 +141,15 @@ function renderPublications() {
             btnGroup.appendChild(codeBtn);
         }
 
-        // Append to DOM
-        paperDiv.appendChild(titleSpan);
+        // Assemble the card
+        paperDiv.appendChild(textDiv);
         paperDiv.appendChild(btnGroup);
+        
+        // Add to DOM
         listContainer.appendChild(paperDiv);
 
-        // Register new item to the observer so it fades in
+        // Trigger animation observer
         observer.observe(paperDiv);
     });
 }
+
