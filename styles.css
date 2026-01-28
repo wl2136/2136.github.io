@@ -1,207 +1,540 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renewable Product AND TCSC-AI | Independent Research Institute</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <h1>Renewable Product AND TCSC-AI</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#activities">Activities</a></li>
-                <li><a href="#collaboration">Collaboration</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Advancing Research at the Intersection of Renewable Products and Artificial Intelligence</h2>
-                <p class="hero-subtitle">An independent, non-profit research institute dedicated to foundational and applied research, innovation, and knowledge dissemination</p>
-                <a href="#publications" class="btn btn-primary">View Publications</a>
-            </div>
-        </div>
-    </section>
+:root {
+    --primary-color: #2c5f41;
+    --secondary-color: #4a9d6f;
+    --accent-color: #6bbf8f;
+    --text-dark: #2c3e50;
+    --text-light: #7f8c8d;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About the Institute</h2>
-            <div class="about-content">
-                <p class="lead"><strong>Renewable Product AND TCSC-AI</strong> is an independent, non-profit research organization committed to advancing knowledge and innovation at the intersection of renewable products and artificial intelligence.</p>
-            </div>
-        </div>
-    </section>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
+}
 
-    <section id="research" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Research Focus</h2>
-            <div class="research-grid">
-                <div class="research-card">
-                    <div class="card-icon">🌱</div>
-                    <h3>Renewable Products</h3>
-                    <p>Research and development of innovative renewable product solutions that contribute to sustainable development.</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">🤖</div>
-                    <h3>Artificial Intelligence</h3>
-                    <p>Advanced AI research focusing on applications that enhance efficiency, decision-making, and innovation.</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">🔬</div>
-                    <h3>TCSC-AI</h3>
-                    <p>Specialized research in TCSC-AI technologies, exploring the unique intersection of this cutting-edge field.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-    <section id="publications" class="section">
-        <div class="container">
-            <h2 class="section-title">Publications & Open Source</h2>
-            <p style="text-align: center; color: #666; margin-bottom: 40px;">
-                Access our latest research papers and associated project codes.
-            </p>
-            
-            <div id="paper-list-container" class="paper-list">
-                <p style="text-align:center; color:#999;">Loading resources...</p>
-            </div>
-        </div>
-    </section>
+/* Navigation */
+.navbar {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+}
 
-    <section id="activities" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Our Activities</h2>
-            <div class="activities-grid">
-                <div class="activity-item"><h3>🔬 Research</h3><p>Foundational & Applied Research.</p></div>
-                <div class="activity-item"><h3>💡 Development</h3><p>Product Innovation & Development.</p></div>
-                <div class="activity-item"><h3>📄 IP</h3><p>Intellectual Property & Patents.</p></div>
-                <div class="activity-item"><h3>📚 Publications</h3><p>Academic & Scientific Papers.</p></div>
-            </div>
-        </div>
-    </section>
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    <section id="collaboration" class="section">
-        <div class="container">
-            <h2 class="section-title">Collaboration</h2>
-            <div class="collaboration-content">
-                <div class="collab-item">
-                    <h3>Academic Partnerships</h3>
-                    <p>We actively collaborate with academic institutions and individual researchers on joint projects.</p>
-                </div>
-                <div class="collab-item">
-                    <h3>Open Collaboration</h3>
-                    <p>We welcome opportunities to work with researchers who share our commitment.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.nav-brand h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
 
-    <section id="team" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Research Team</h2>
-            <div class="team-grid">
-                <div class="team-member"><h3>Faraji Hamid</h3><p>Management</p><p>📍 Istanbul, Turkey</p></div>
-                <div class="team-member"><h3>Furukawa Noritoshi</h3><p>Electrical Engineering</p><p>📍 Tokyo, Japan</p></div>
-                <div class="team-member"><h3>Oikawa Hitoshi</h3><p>Electrical Engineering</p><p>📍 Tokyo, Japan</p></div>
-                <div class="team-member"><h3>Khaki Mehrdad</h3><p>Management</p><p>📍 Tehran, Iran</p></div>
-            </div>
-        </div>
-    </section>
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="contact-content">
-                <p><strong>Institute:</strong> Renewable Product AND TCSC-AI</p>
-                <p><strong>Type:</strong> Independent, Non-Profit Research Organization</p>
-            </div>
-        </div>
-    </section>
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Renewable Product AND TCSC-AI. All rights reserved.</p>
-            <p class="footer-note">TCSC-AI was created in 2023</p>
-        </div>
-    </footer>
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--secondary-color);
+}
 
-    <script src="config.js"></script>
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 6rem 0;
+    text-align: center;
+}
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const listContainer = document.getElementById('paper-list-container');
-            
-            // 检查配置是否存在
-            if (typeof paperList === 'undefined' || !paperList) {
-                listContainer.innerHTML = '<p style="color:red; text-align:center;">Config Error: config.js not loaded.</p>';
-                return;
-            }
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-            // 清空 Loading
-            listContainer.innerHTML = '';
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
 
-            // 遍历 config.js 中的数组
-            paperList.forEach(item => {
-                // 创建卡片
-                const card = document.createElement('div');
-                card.className = 'paper-item';
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.6;
+}
 
-                // 创建标题
-                const titleSpan = document.createElement('span');
-                titleSpan.className = 'paper-title';
-                titleSpan.textContent = item.title;
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
 
-                // 创建按钮组容器
-                const btnGroup = document.createElement('div');
-                btnGroup.className = 'btn-group';
+.btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+}
 
-                // 1. Paper 按钮 (如果 file 字段不为空)
-                if (item.file) {
-                    const paperLink = document.createElement('a');
-                    paperLink.href = 'papers/' + item.file; // 自动加上 papers/ 前缀
-                    paperLink.className = 'btn-sm btn-paper';
-                    paperLink.textContent = '📄 Paper';
-                    paperLink.target = '_blank';
-                    btnGroup.appendChild(paperLink);
-                }
+.btn-primary:hover {
+    background-color: var(--bg-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
 
-                // 2. Code 按钮 (如果 code 字段不为空)
-                if (item.code) {
-                    const codeLink = document.createElement('a');
-                    codeLink.href = item.code;
-                    codeLink.className = 'btn-sm btn-code';
-                    codeLink.textContent = '💻 Code';
-                    codeLink.target = '_blank';
-                    btnGroup.appendChild(codeLink);
-                }
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+    margin-top: 1rem;
+}
 
-                // 组装到 HTML 中
-                card.appendChild(titleSpan);
-                card.appendChild(btnGroup);
-                listContainer.appendChild(card);
-            });
-        });
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
 
-        // 导航栏平滑滚动逻辑
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-</body>
-</html>
+/* Sections */
+.section {
+    padding: 5rem 0;
+}
+
+.section-alt {
+    background-color: var(--bg-light);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* About Section */
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+}
+
+.lead {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+/* Research Grid */
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.research-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.research-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.research-card h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.research-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Activities Grid */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.activity-item {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+
+.activity-item:hover {
+    transform: translateX(5px);
+}
+
+.activity-item h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.activity-item p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Collaboration Section */
+.collaboration-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.collab-item {
+    background-color: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.collab-item h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.collab-item p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.clickable-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clickable-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Contact Section */
+.contact-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-content > p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+.contact-info {
+    background-color: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.contact-info strong {
+    color: var(--primary-color);
+}
+
+.contact-note {
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* Research Team Section */
+.team-intro {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.team-intro p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.team-member {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--secondary-color);
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.member-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.team-member h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.member-role {
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.member-department {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.member-location {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--text-dark);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+.footer-note {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .research-grid,
+    .activities-grid,
+    .collaboration-content,
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 4rem 0;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .section {
+        padding: 3rem 0;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+}
+
+/* ================================================== */
+/* 【新增】Publications List Styles (Matches Theme) */
+/* ================================================== */
+.paper-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.paper-item {
+    background-color: var(--bg-white);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color); /* 与主色调一致 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.paper-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-right: 2rem;
+    flex: 1;
+}
+
+.paper-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Smaller Buttons specific to the list */
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-paper {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-paper:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-code {
+    background-color: var(--text-dark);
+    color: white;
+    border: 1px solid var(--text-dark);
+}
+
+.btn-code:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+}
+
+/* Mobile responsive for the list */
+@media (max-width: 600px) {
+    .paper-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .paper-title {
+        margin-right: 0;
+    }
+    .paper-btn-group {
+        width: 100%;
+    }
+    .btn-sm {
+        flex: 1;
+    }
+}
