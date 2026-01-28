@@ -1,8 +1,9 @@
+
 # Renewable Product AND TCSC-AI Research Institute Website
 
 This is a **pure static website template** designed for research institutes or academic individuals. It is built using HTML, CSS, and JavaScript, requiring no backend server (like Node.js or Python), making it perfect for deployment on **GitHub Pages**.
 
-The core feature of this project is the **Dynamic Publications List**: simply edit a single configuration file (`config.js`), and the "Publications" section on the website will update automatically. It supports both local PDF files and remote links (e.g., arXiv).
+The core feature of this project is its **Data-Driven Architecture**: almost all website content (Publications, Team, Research Focus, etc.) is managed via a single configuration file (`config.js`). You do not need to edit HTML code to update your content.
 
 ## 📂 Project Structure
 
@@ -11,10 +12,10 @@ Ensure your folder structure looks like this:
 ```text
 my-website/
 │
-├── index.html       # Main website file (Structure, Navigation, Content)
+├── index.html       # Main website file (Structure, Navigation, Layout)
 ├── style.css        # Stylesheet (Colors, Layouts, Visuals)
-├── script.js        # Logic script (Animations, Rendering the paper list)
-├── config.js        # 【Core Config】Manage your publications data here
+├── script.js        # Logic script (Renders content from config.js)
+├── config.js        # 【Core Config】Manage ALL your content here
 ├── README.md        # Documentation
 │
 └── papers/          # (Optional) Folder to store local PDF files
@@ -32,49 +33,109 @@ my-website/
 
 ---
 
-## 📝 How to Manage Publications
+## 📝 How to Manage Content
 
-This is the main feature of the project. You do not need to touch the HTML code; just edit the `config.js` file.
+You can control the entire website content by editing **`config.js`**. The file is divided into 5 main sections:
 
-### 1. Open `config.js`
+### 1. About the Institute (`aboutContent`)
 
-Open the file using a text editor (like Notepad) or a code editor (like VS Code).
+This is an array of strings. Each string represents a paragraph in the "About" section. You can use HTML tags like `<strong>` for bold text.
 
-### 2. Add or Edit Entries
+```javascript
+const aboutContent = [
+    "<strong>My Institute</strong> is a great place...", // Paragraph 1
+    "We focus on AI and Energy..."                     // Paragraph 2
+];
 
-Add new objects to the `paperList` array. Each paper object contains three properties:
+```
 
-* `title`: The title displayed on the list.
-* `file`: The link opened when the "Paper" button is clicked.
-* **Remote Link**: Enter the full URL (e.g., `https://arxiv.org/pdf/xxx`).
-* **Local File**: Enter the relative path (e.g., `papers/my-file.pdf`), ensuring the file exists in the `papers` folder.
+### 2. Research Focus (`researchFocus`)
+
+Define your key research areas here.
+
+* `icon`: An emoji or text icon.
+* `title`: The title of the card.
+* `description`: A short description.
+
+```javascript
+const researchFocus = [
+    {
+        icon: "🌱",
+        title: "Renewable Products",
+        description: "Research on sustainable development..."
+    }
+];
+
+```
+
+### 3. Publications (`paperList`)
+
+Manage your papers and projects.
+
+* `title`: Paper title.
+* `date`: Publication date (e.g., "2026-01-15").
+* `file`: Direct link to the PDF.
+* **Remote**: `"https://arxiv.org/..."`
+* **Local**: `"papers/filename.pdf"`
 
 
-* `code`: The link opened when the "Code" button is clicked. If left empty `""`, the button will automatically hide.
-
-### ✅ Configuration Examples
+* `code`: GitHub URL. Leave empty `""` to hide the button.
 
 ```javascript
 const paperList = [
-    // Example 1: Remote Link (e.g., arXiv)
     {
-        title: "Adaptive Gradient-Field Poisson Blending for Video Synthesis",
+        title: "Adaptive Gradient-Field Poisson Blending",
+        date: "2025-12-20",
         file: "[https://arxiv.org/pdf/2101.00001.pdf](https://arxiv.org/pdf/2101.00001.pdf)", 
         code: "[https://github.com/your-username/project-2](https://github.com/your-username/project-2)"
     },
-
-    // Example 2: Local File (File must be in the 'papers' folder)
     {
-        title: "Variational Causal-Graph Enhanced Network",
-        file: "papers/my-local-paper.pdf",
-        code: "[https://github.com/your-username/project-1](https://github.com/your-username/project-1)"
+        title: "My Local Paper",
+        date: "2026-01-15",
+        file: "papers/my-file.pdf", 
+        code: ""
+    }
+];
+
+```
+
+### 4. Collaboration (`collaborationList`)
+
+Manage partnership opportunities.
+
+* `link`: (Optional) URL to navigate to when clicked.
+* `scrollTarget`: Set to `true` if the link is an ID on the same page (e.g., `#team`).
+
+```javascript
+const collaborationList = [
+    {
+        title: "Academic Partnerships",
+        description: "We collaborate with universities..."
     },
-
-    // Example 3: No Code Link (The Code button will be hidden)
     {
-        title: "A Pure Theoretical Review of TCSC-AI",
-        file: "[https://example.com/paper.pdf](https://example.com/paper.pdf)", 
-        code: "" 
+        title: "Join Us",
+        description: "View our open positions.",
+        link: "#contact",
+        linkText: "Contact Us",
+        scrollTarget: true
+    }
+];
+
+```
+
+### 5. Research Team (`teamMembers`)
+
+Manage your team members.
+
+* `department`: (Optional) Department name.
+
+```javascript
+const teamMembers = [
+    {
+        name: "Dr. John Doe",
+        role: "Lead Researcher",
+        department: "AI Division",
+        location: "Tokyo, Japan"
     }
 ];
 
@@ -82,24 +143,11 @@ const paperList = [
 
 ---
 
-## 🎨 How to Edit Content
+## 🎨 How to Edit Static Layout
 
-To change static text like "About Us," "Team Members," or "Contact Info," you need to edit `index.html` directly.
+To change the basic website structure, navigation menu items, or the "Contact Us" static text at the bottom, you will need to edit **`index.html`** directly.
 
-### Editing Team Members
-
-Find the `<section id="team">` part in the HTML file:
-
-```html
-<div class="team-member">
-    <div class="member-icon">👤</div>
-    <h3>Member Name</h3> <p class="member-role">Position/Role</p> <p class="member-location">📍 Location</p> </div>
-
-```
-
-### Editing Contact Info
-
-Find the `<section id="contact">` part and edit the text content directly.
+However, 90% of the content is now managed dynamically via `config.js`.
 
 ---
 
@@ -133,3 +181,5 @@ A: **No**. This is a pure static project. It runs on any computer with a browser
 ---
 
 ## 📜 License
+
+[Add your license here, e.g., MIT License]
