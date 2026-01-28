@@ -444,3 +444,97 @@ body {
         font-size: 1.75rem;
     }
 }
+
+/* ================================================== */
+/* 【新增】Publications List Styles (Matches Theme) */
+/* ================================================== */
+.paper-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.paper-item {
+    background-color: var(--bg-white);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color); /* 与主色调一致 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.paper-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-right: 2rem;
+    flex: 1;
+}
+
+.paper-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Smaller Buttons specific to the list */
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-paper {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-paper:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-code {
+    background-color: var(--text-dark);
+    color: white;
+    border: 1px solid var(--text-dark);
+}
+
+.btn-code:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+}
+
+/* Mobile responsive for the list */
+@media (max-width: 600px) {
+    .paper-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .paper-title {
+        margin-right: 0;
+    }
+    .paper-btn-group {
+        width: 100%;
+    }
+    .btn-sm {
+        flex: 1;
+    }
+}

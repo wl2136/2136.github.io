@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -17,6 +16,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
                 <li><a href="#activities">Activities</a></li>
                 <li><a href="#collaboration">Collaboration</a></li>
                 <li><a href="#team">Research Team</a></li>
@@ -25,18 +25,16 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h2 class="hero-title">Advancing Research at the Intersection of Renewable Products and Artificial Intelligence</h2>
                 <p class="hero-subtitle">An independent, non-profit research institute dedicated to foundational and applied research, innovation, and knowledge dissemination</p>
-                <a href="#about" class="btn btn-primary">Learn More</a>
+                <a href="#publications" class="btn btn-primary">View Publications</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">About the Institute</h2>
@@ -56,7 +54,6 @@
         </div>
     </section>
 
-    <!-- Research Focus Section -->
     <section id="research" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Research Focus</h2>
@@ -80,8 +77,21 @@
         </div>
     </section>
 
-    <!-- Activities Section -->
-    <section id="activities" class="section">
+    <section id="publications" class="section">
+        <div class="container">
+            <h2 class="section-title">Latest Publications & Open Source</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Access our latest research papers and associated engineering code. 
+                Full project code is available for reproducible research.
+            </p>
+            
+            <div id="paper-list-container" class="paper-list-container">
+                <p style="text-align:center; color: var(--text-light);">Loading publications...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Our Activities</h2>
             <div class="activities-grid">
@@ -109,8 +119,7 @@
         </div>
     </section>
 
-    <!-- Collaboration Section -->
-    <section id="collaboration" class="section section-alt">
+    <section id="collaboration" class="section">
         <div class="container">
             <h2 class="section-title">Collaboration & Partnerships</h2>
             <div class="collaboration-content">
@@ -131,8 +140,7 @@
         </div>
     </section>
 
-    <!-- Research Team Section -->
-    <section id="team" class="section">
+    <section id="team" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Research Team</h2>
             <div class="team-intro">
@@ -193,8 +201,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section section-alt">
+    <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title">Contact Us</h2>
             <div class="contact-content">
@@ -208,7 +215,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Renewable Product AND TCSC-AI. All rights reserved.</p>
@@ -217,6 +223,7 @@
         </div>
     </footer>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
