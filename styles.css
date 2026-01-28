@@ -446,7 +446,7 @@ body {
 }
 
 /* ================================================== */
-/* 【新增】Publications List Styles (Matches Theme) */
+/* PUBLICATIONS & LIST STYLES */
 /* ================================================== */
 .paper-list-container {
     display: flex;
@@ -461,7 +461,7 @@ body {
     padding: 1.5rem 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary-color); /* 与主色调一致 */
+    border-left: 4px solid var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -473,12 +473,30 @@ body {
     box-shadow: var(--shadow-hover);
 }
 
+/* Wrapper for Title and Date */
+.paper-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem; /* Space between date and title */
+    flex: 1;
+    margin-right: 2rem;
+}
+
 .paper-title {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-dark);
-    margin-right: 2rem;
-    flex: 1;
+}
+
+.paper-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: 'Segoe UI', monospace; /* Monospace for date looks academic */
+    background-color: #f0f2f5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    align-self: flex-start; /* Align left */
+    display: inline-block;
 }
 
 .paper-btn-group {
@@ -487,7 +505,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Smaller Buttons specific to the list */
+/* Button Styles */
 .btn-sm {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
@@ -521,15 +539,16 @@ body {
     transform: translateY(-2px);
 }
 
-/* Mobile responsive for the list */
+/* Mobile Responsive */
 @media (max-width: 600px) {
     .paper-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-    .paper-title {
+    .paper-info {
         margin-right: 0;
+        width: 100%;
     }
     .paper-btn-group {
         width: 100%;
@@ -537,78 +556,4 @@ body {
     .btn-sm {
         flex: 1;
     }
-}
-/* ================================================== */
-/* 🆕 Updated Publications Styles with Date */
-/* ================================================== */
-.paper-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.paper-item {
-    background-color: var(--bg-white);
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    border-left: 4px solid var(--primary-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* 垂直居中 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.paper-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-}
-
-.paper-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin: 0;
-    line-height: 1.4;
-}
-
-/* ✅ 新增：日期的样式 */
-.paper-date {
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-top: 5px;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    font-weight: 500;
-}
-
-.paper-btn-group {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-    margin-left: 20px; /* 这里的间距防止按钮贴太近 */
-}
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-    .paper-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    .paper-btn-group {
-        width: 100%;
-        margin-left: 0;
-    }
-    .btn-sm {
-        flex: 1;
-        text-align: center;
-    }
-}
-
-.loading-text {
-    text-align: center;
-    color: var(--text-light);
-    font-style: italic;
 }
