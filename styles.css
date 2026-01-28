@@ -538,3 +538,77 @@ body {
         flex: 1;
     }
 }
+/* ================================================== */
+/* 🆕 Updated Publications Styles with Date */
+/* ================================================== */
+.paper-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.paper-item {
+    background-color: var(--bg-white);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 垂直居中 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paper-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.paper-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ✅ 新增：日期的样式 */
+.paper-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 5px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-weight: 500;
+}
+
+.paper-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 20px; /* 这里的间距防止按钮贴太近 */
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .paper-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .paper-btn-group {
+        width: 100%;
+        margin-left: 0;
+    }
+    .btn-sm {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+.loading-text {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
