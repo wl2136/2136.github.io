@@ -3,227 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renewable Product AND TCSC-AI | Independent Research Institute</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Academic Sharing Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        
+        .pdf-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            background: #f8fafc;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Simple fade-in animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <h1>Renewable Product AND TCSC-AI</h1>
+<body class="bg-zinc-50">
+    <nav class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="h-16 flex items-center justify-between">
+                <div class="flex items-center gap-x-12">
+                    <div class="flex items-center gap-x-3 cursor-pointer" onclick="showBrowse()">
+                        <div class="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl">A</div>
+                        <div>
+                            <div class="font-semibold text-xl tracking-tight">Academic Sharing</div>
+                            <div class="text-[10px] text-zinc-500 -mt-1">Admin Upload Only</div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-x-8 text-sm font-medium text-zinc-600">
+                        <a href="#" onclick="showBrowse()" class="hover:text-blue-600 transition-colors nav-link" id="nav-browse">Browse</a>
+                        <a href="#" onclick="showLatest()" class="hover:text-blue-600 transition-colors nav-link">Latest Uploads</a>
+                        <a href="#" onclick="showPopular()" class="hover:text-blue-600 transition-colors nav-link">Popular Downloads</a>
+                        <a href="#" onclick="showAbout()" class="hover:text-blue-600 transition-colors nav-link" id="nav-about">About</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <div class="bg-zinc-100 text-zinc-500 text-xs px-3 py-1.5 rounded-full">Visitor Mode • Read-Only Access</div>
+                    <div onclick="alert('Admin Login (Internal Use Only)')" 
+                         class="bg-zinc-900 text-white text-sm px-5 py-2 rounded-xl cursor-pointer hover:bg-black transition-colors">
+                        Admin Dashboard
+                    </div>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#activities">Activities</a></li>
-                <li><a href="#collaboration">Collaboration</a></li>
-                <li><a href="#team">Research Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Advancing Research at the Intersection of Renewable Products and Artificial Intelligence</h2>
-                <p class="hero-subtitle">An independent, non-profit research institute dedicated to foundational and applied research, innovation, and knowledge dissemination</p>
-                <a href="#publications" class="btn btn-primary">View Publications</a>
+    <div id="searchSection" class="bg-white border-b transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-6">
+            <div class="flex gap-4">
+                <div class="flex-1 relative">
+                    <input type="text" id="searchInput" 
+                           class="w-full bg-zinc-50 border border-zinc-200 pl-12 py-3.5 rounded-2xl focus:outline-hidden focus:border-blue-600 placeholder:text-zinc-400"
+                           placeholder="Search by title, author, or keywords...">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400 absolute left-4 top-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <div class="flex gap-3">
+                    <select id="typeFilter" class="bg-zinc-50 border border-zinc-200 px-5 rounded-2xl text-sm outline-none focus:border-blue-600">
+                        <option value="">All Types</option>
+                        <option value="assignment">Student Assignment</option>
+                        <option value="preprint">Preprint</option>
+                        <option value="published">Published Paper</option>
+                    </select>
+                    <select id="subjectFilter" class="bg-zinc-50 border border-zinc-200 px-5 rounded-2xl text-sm outline-none focus:border-blue-600">
+                        <option value="">All Subjects</option>
+                        <option value="computer">Computer Science</option>
+                        <option value="physics">Physics</option>
+                        <option value="biology">Biology</option>
+                        <option value="mathematics">Mathematics</option>
+                    </select>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About the Institute</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="lead">
-                        <strong>Renewable Product AND TCSC-AI</strong> is an independent, non-profit research organization committed to advancing knowledge and innovation at the intersection of renewable products and artificial intelligence, with a specific emphasis on TCSC-AI technologies. TCSC-AI was created in 2023.
-                    </p>
-                    <p>
-                        Our institute operates with a mission to bridge the gap between theoretical research and practical applications, fostering innovation that addresses real-world challenges in renewable energy and artificial intelligence domains.
-                    </p>
-                    <p>
-                        As a non-profit organization, we are driven by the pursuit of knowledge and the advancement of science, rather than commercial interests. This allows us to focus on long-term research goals and collaborative partnerships that benefit the broader scientific community.
-                    </p>
-                </div>
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <div id="mainContent">
             </div>
-        </div>
-    </section>
+    </div>
 
-    <section id="research" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Research Focus</h2>
-            <div class="research-grid">
-                <div class="research-card">
-                    <div class="card-icon">🌱</div>
-                    <h3>Renewable Products</h3>
-                    <p>Research and development of innovative renewable product solutions that contribute to sustainable development and environmental conservation.</p>
+    <div id="detailModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-6 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl w-full max-w-5xl max-h-[95vh] overflow-hidden flex flex-col shadow-2xl">
+            <div class="flex justify-between items-center border-b px-8 py-5">
+                <div>
+                    <div id="modalType" class="text-xs font-medium uppercase tracking-widest text-blue-600"></div>
+                    <div id="modalTitle" class="text-2xl font-semibold mt-1"></div>
                 </div>
-                <div class="research-card">
-                    <div class="card-icon">🤖</div>
-                    <h3>Artificial Intelligence</h3>
-                    <p>Advanced AI research focusing on applications that enhance efficiency, decision-making, and innovation across various domains.</p>
-                </div>
-                <div class="research-card">
-                    <div class="card-icon">🔬</div>
-                    <h3>TCSC-AI</h3>
-                    <p>Specialized research in TCSC-AI technologies, exploring the unique intersection and applications of this cutting-edge field. TCSC-AI was created in 2023.</p>
+                <div onclick="closeModal()" class="w-10 h-10 flex items-center justify-center hover:bg-zinc-100 rounded-full cursor-pointer transition-colors text-zinc-500 hover:text-zinc-900">
+                    ✕
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="publications" class="section">
-        <div class="container">
-            <h2 class="section-title">Latest Publications & Open Source</h2>
-            <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Access our latest research papers and associated engineering code. 
-                Full project code is available for reproducible research.
-            </p>
-            
-            <div id="paper-list-container" class="paper-list-container">
-                <p style="text-align:center; color: var(--text-light);">Loading publications...</p>
-            </div>
-        </div>
-    </section>
+            <div class="flex flex-1 overflow-hidden">
+                <div class="flex-1 border-r flex flex-col">
+                    <div class="bg-zinc-50 px-8 py-4 border-b flex items-center gap-4">
+                        <div id="modalAuthors" class="text-sm text-zinc-600"></div>
+                        <div class="ml-auto flex gap-3">
+                            <button onclick="downloadCurrent()" class="flex items-center gap-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-2xl text-sm font-medium transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v-4m0 0l4 4m-4-4l4-4m12 8v-8" />
+                                </svg>
+                                Download PDF
+                            </button>
+                            <button onclick="downloadCode()" id="codeDownloadBtn" class="hidden flex items-center gap-x-2 border border-zinc-300 hover:bg-zinc-50 px-6 py-2.5 rounded-2xl text-sm font-medium transition-colors">
+                                Download Code
+                            </button>
+                        </div>
+                    </div>
+                    <div id="pdfViewer" class="flex-1 p-8 overflow-auto bg-zinc-100/50"></div>
+                </div>
 
-    <section id="activities" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Our Activities</h2>
-            <div class="activities-grid">
-                <div class="activity-item">
-                    <h3>🔬 Foundational & Applied Research</h3>
-                    <p>We conduct both foundational research that advances theoretical understanding and applied research that addresses practical challenges in renewable products and AI technologies.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>💡 Product Development</h3>
-                    <p>Our research translates into practical products and solutions that can be implemented in real-world scenarios, bridging the gap between research and application.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>📄 Intellectual Property</h3>
-                    <p>We actively file for patents to protect our intellectual property, ensuring that our innovations can be properly developed and shared with the research community.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>📚 Academic Publications</h3>
-                    <p>We produce and publish academic papers that contribute to the scientific literature, sharing our findings with the global research community.</p>
-                </div>
-                <div class="activity-item">
-                    <h3>📋 Consultation Reports</h3>
-                    <p>We create detailed consultation reports for clients and partners, providing expert analysis and recommendations based on our research expertise.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="w-96 flex flex-col bg-white">
+                    <div class="p-8 flex-1 overflow-auto">
+                        <div class="mb-8">
+                            <div class="uppercase text-zinc-500 text-xs tracking-widest font-medium mb-2">Abstract</div>
+                            <div id="modalAbstract" class="text-zinc-700 leading-relaxed text-sm"></div>
+                        </div>
 
-    <section id="collaboration" class="section">
-        <div class="container">
-            <h2 class="section-title">Collaboration & Partnerships</h2>
-            <div class="collaboration-content">
-                <div class="collab-item">
-                    <h3>Academic Partnerships</h3>
-                    <p>We actively collaborate with academic institutions and individual researchers on joint projects, fostering a collaborative research environment that leverages diverse expertise and resources.</p>
-                </div>
-                <div class="collab-item clickable-card" onclick="document.getElementById('team').scrollIntoView({behavior: 'smooth'})">
-                    <h3>Research Team</h3>
-                    <p>To support our mission and research activities, the institute directly employs individual researchers as part of our core team, bringing together talented professionals dedicated to advancing our research goals.</p>
-                    <a href="#team" class="btn btn-secondary">View Team Members</a>
-                </div>
-                <div class="collab-item">
-                    <h3>Open Collaboration</h3>
-                    <p>We welcome opportunities to work with researchers, institutions, and organizations that share our commitment to advancing knowledge in renewable products and artificial intelligence.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div class="mb-8">
+                            <div class="uppercase text-zinc-500 text-xs tracking-widest font-medium mb-3">Keywords</div>
+                            <div id="modalKeywords" class="flex flex-wrap gap-2"></div>
+                        </div>
 
-    <section id="team" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Research Team</h2>
-            <div class="team-intro">
-                <p>Our research team consists of dedicated professionals from around the world, working together to advance research in renewable products and TCSC-AI technologies.</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Faraji Hamid</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Istanbul, Turkey</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Furukawa Noritoshi</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-department">Department of Electrical Engineering</p>
-                    <p class="member-location">📍 Tokyo, Japan</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Jamal Farah</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Istanbul, Turkey</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Karam Iman</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Ankara, Turkey</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Khaki Mehrdad</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Tehran, Iran</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Oikawa Hitoshi</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-department">Department of Electrical Engineering</p>
-                    <p class="member-location">📍 Tokyo, Japan</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Samad Nasir</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Tokyo, Japan</p>
-                </div>
-                <div class="team-member">
-                    <div class="member-icon">👤</div>
-                    <h3>Suzuki Kengo</h3>
-                    <p class="member-role">Renewable Product and TCSC-AI Management</p>
-                    <p class="member-location">📍 Hokkaido, Japan</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                        <div>
+                            <div class="uppercase text-zinc-500 text-xs tracking-widest font-medium mb-3">Version History</div>
+                            <div id="modalVersions" class="space-y-3"></div>
+                        </div>
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="contact-content">
-                <p>For inquiries about our research, collaboration opportunities, or consultation services, please reach out to us.</p>
-                <div class="contact-info">
-                    <p><strong>Institute:</strong> Renewable Product AND TCSC-AI</p>
-                    <p><strong>Type:</strong> Independent, Non-Profit Research Organization</p>
-                    <p class="contact-note">Please contact us through your preferred channel for detailed information about our research activities and partnership opportunities.</p>
+                        <div class="mt-10 pt-6 border-t border-dashed">
+                            <div class="uppercase text-zinc-500 text-xs tracking-widest font-medium mb-2">Administrator Note</div>
+                            <div id="modalAdminNote" class="text-zinc-600 italic text-sm bg-zinc-50 p-3 rounded-xl border"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Renewable Product AND TCSC-AI. All rights reserved.</p>
-            <p class="footer-note">An independent, non-profit research institute</p>
-            <p class="footer-note">TCSC-AI was created in 2023</p>
-        </div>
-    </footer>
+    </div>
 
     <script src="config.js"></script>
-    <script src="script.js"></script>
+
+    <script>
+        // Global variables, data sourced from config.js
+        const papers = platformConfig.papers;
+        let currentPaper = null;
+
+        // ======================
+        // Core Rendering Logic (Papers)
+        // ======================
+        function renderPapers(filteredPapers) {
+            const container = document.getElementById('mainContent');
+            container.innerHTML = '';
+            
+            // Ensure search bar is visible
+            document.getElementById('searchSection').classList.remove('hidden');
+            
+            // Update nav state
+            updateNavState('browse');
+
+            if (filteredPapers.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h3 class="text-xl font-medium text-zinc-900">No papers found</h3>
+                        <p class="text-zinc-500 mt-2">Try adjusting your search or filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in';
+
+            filteredPapers.forEach(paper => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden border border-zinc-100 card-hover cursor-pointer transition-all duration-300';
+                card.onclick = () => showDetail(paper);
+
+                let typeLabel = '';
+                let typeColor = '';
+                let gradientClass = '';
+
+                if (paper.type === 'preprint') {
+                    typeLabel = 'PREPRINT';
+                    typeColor = 'bg-purple-100 text-purple-700';
+                    gradientClass = 'from-purple-500 to-indigo-600';
+                } else if (paper.type === 'assignment') {
+                    typeLabel = 'STUDENT ASSIGNMENT';
+                    typeColor = 'bg-amber-100 text-amber-700';
+                    gradientClass = 'from-amber-500 to-orange-600';
+                } else {
+                    typeLabel = 'PUBLISHED PAPER';
+                    typeColor = 'bg-blue-100 text-blue-700';
+                    gradientClass = 'from-blue-600 to-cyan-600';
+                }
+
+                card.innerHTML = `
+                    <div class="h-2 bg-gradient-to-r ${gradientClass}"></div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${typeColor}">
+                                ${typeLabel}
+                            </span>
+                            <span class="text-xs text-zinc-500 font-medium">${paper.subject.charAt(0).toUpperCase() + paper.subject.slice(1)}</span>
+                        </div>
+                        <div class="font-bold text-lg leading-snug mb-3 line-clamp-2 text-zinc-900">${paper.title}</div>
+                        <div class="text-zinc-600 text-sm mb-4 line-clamp-1">${paper.authors}</div>
+                        <div class="flex justify-between items-center text-xs text-zinc-400 font-medium pt-4 border-t border-zinc-50">
+                            <div class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                                ${paper.downloadCount}
+                            </div>
+                            <div>${paper.date}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            })
+
+            container.appendChild(grid);
+        }
+
+        // ======================
+        // Core Rendering Logic (About Page)
+        // ======================
+        function showAbout() {
+            const container = document.getElementById('mainContent');
+            // Hide search bar
+            document.getElementById('searchSection').classList.add('hidden');
+            
+            // Update nav state
+            updateNavState('about');
+
+            container.innerHTML = `
+                <div class="max-w-4xl mx-auto space-y-12 fade-in">
+                    <section id="about" class="bg-white rounded-[2rem] p-10 border border-zinc-100 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <h2 class="text-3xl font-bold text-zinc-900">${platformConfig.about.title}</h2>
+                        </div>
+                        <div class="text-zinc-600 space-y-4 leading-relaxed text-lg">
+                            ${platformConfig.about.paragraphs.map(p => `<p>${p}</p>`).join('')}
+                        </div>
+                    </section>
+
+                    <section id="team">
+                        <div class="flex items-center gap-3 mb-8 px-2">
+                             <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-zinc-900">Research Team</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            ${platformConfig.team.map(member => `
+                                <div class="bg-white p-6 rounded-3xl border border-zinc-100 flex items-center gap-5 hover:border-zinc-200 transition-colors">
+                                    <div class="w-16 h-16 rounded-2xl ${member.avatarColor || 'bg-zinc-100 text-zinc-500'} flex items-center justify-center text-2xl">
+                                        👤
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-lg text-zinc-900">${member.name}</div>
+                                        <div class="text-blue-600 text-sm font-medium mb-1">${member.role}</div>
+                                        <div class="text-zinc-500 text-xs flex items-center gap-1">
+                                            <span>📍</span> ${member.location}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <section id="contact" class="bg-white rounded-[2rem] p-10 border border-zinc-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-16 -mt-16 blur-3xl opacity-60"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                </div>
+                                <h2 class="text-2xl font-bold text-zinc-900">${platformConfig.contact.title}</h2>
+                            </div>
+                            <p class="text-zinc-600 mb-8 max-w-2xl text-lg">${platformConfig.contact.description}</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="bg-zinc-50 p-6 rounded-2xl border border-zinc-100">
+                                    <div class="text-blue-600 text-xs uppercase tracking-widest font-bold mb-2">Email Us</div>
+                                    <a href="mailto:${platformConfig.contact.email}" class="text-xl font-semibold text-zinc-900 hover:text-blue-600 transition-colors">${platformConfig.contact.email}</a>
+                                </div>
+                                <div class="bg-zinc-50 p-6 rounded-2xl border border-zinc-100">
+                                    <div class="text-blue-600 text-xs uppercase tracking-widest font-bold mb-2">Visit Us</div>
+                                    <div class="text-lg text-zinc-900">${platformConfig.contact.address}</div>
+                                </div>
+                            </div>
+                            <div class="mt-8 pt-6 border-t border-zinc-100 text-zinc-500 text-sm italic">
+                                ℹ️ ${platformConfig.contact.note}
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            `;
+        }
+
+        // ======================
+        // Helper Functions & Event Handlers
+        // ======================
+        
+        function updateNavState(activeId) {
+            // Reset all nav styles
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(l => l.classList.remove('text-blue-600', 'font-bold'));
+            
+            // Highlight active link
+            if(activeId === 'about') {
+                document.getElementById('nav-about').classList.add('text-blue-600', 'font-bold');
+            } else if (activeId === 'browse') {
+                 document.getElementById('nav-browse')?.classList.add('text-blue-600', 'font-bold');
+            }
+        }
+
+        function showDetail(paper) {
+            currentPaper = paper;
+
+            document.getElementById('modalTitle').textContent = paper.title;
+            document.getElementById('modalAuthors').textContent = paper.authors;
+            document.getElementById('modalAbstract').textContent = paper.abstract;
+
+            const typeEl = document.getElementById('modalType');
+            if (paper.type === 'preprint') {
+                typeEl.textContent = 'PREPRINT';
+                typeEl.className = 'text-xs font-bold uppercase tracking-widest text-purple-600';
+            } else if (paper.type === 'assignment') {
+                typeEl.textContent = 'STUDENT ASSIGNMENT';
+                typeEl.className = 'text-xs font-bold uppercase tracking-widest text-amber-600';
+            } else {
+                typeEl.textContent = 'PUBLISHED PAPER';
+                typeEl.className = 'text-xs font-bold uppercase tracking-widest text-blue-600';
+            }
+
+            const kwContainer = document.getElementById('modalKeywords');
+            kwContainer.innerHTML = '';
+            paper.keywords.forEach(kw => {
+                const span = document.createElement('span');
+                span.className = 'bg-zinc-100 text-zinc-700 px-4 py-1.5 text-sm rounded-full font-medium';
+                span.textContent = kw;
+                kwContainer.appendChild(span);
+            })
+
+            const verContainer = document.getElementById('modalVersions');
+            verContainer.innerHTML = '';
+            paper.versions.forEach(v => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-3 bg-zinc-50 rounded-2xl px-4 py-3 border border-zinc-100';
+                div.innerHTML = `<div class="text-zinc-400 text-sm">📄</div><div class="text-sm font-medium text-zinc-700">${v}</div>`;
+                verContainer.appendChild(div);
+            })
+
+            document.getElementById('modalAdminNote').textContent = paper.adminNote || 'No administrator note available.';
+
+            const codeBtn = document.getElementById('codeDownloadBtn');
+            if (paper.hasCode) {
+                codeBtn.classList.remove('hidden');
+                codeBtn.onclick = () => window.open(paper.codeUrl, '_blank');
+            } else {
+                codeBtn.classList.add('hidden');
+            }
+
+            document.getElementById('detailModal').classList.remove('hidden');
+            document.getElementById('detailModal').classList.add('flex');
+
+            const viewer = document.getElementById('pdfViewer');
+            // Note: Google Viewer may have CORS issues in local env. Use pdf.js for production.
+            viewer.innerHTML = `
+                <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(paper.pdfUrl)}&embedded=true" 
+                        class="w-full h-full border-0 rounded-xl" frameborder="0"></iframe>
+            `;
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+            document.getElementById('detailModal').classList.remove('flex');
+        }
+
+        function downloadCurrent() {
+            if (currentPaper) window.open(currentPaper.pdfUrl, '_blank');
+        }
+
+        function downloadCode() {
+            if (currentPaper && currentPaper.hasCode) window.open(currentPaper.codeUrl, '_blank');
+        }
+
+        function showBrowse() {
+            renderPapers(papers);
+        }
+
+        function showLatest() {
+            const sorted = [...papers].sort((a, b) => b.date.localeCompare(a.date));
+            renderPapers(sorted);
+        }
+
+        function showPopular() {
+            const sorted = [...papers].sort((a, b) => b.downloadCount - a.downloadCount);
+            renderPapers(sorted);
+        }
+
+        function filterPapers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const typeFilter = document.getElementById('typeFilter').value;
+            const subjectFilter = document.getElementById('subjectFilter').value;
+
+            const filtered = papers.filter(paper => {
+                const matchSearch = paper.title.toLowerCase().includes(searchTerm) || 
+                                  paper.authors.toLowerCase().includes(searchTerm) ||
+                                  paper.abstract.toLowerCase().includes(searchTerm);
+                
+                const matchType = !typeFilter || 
+                    (typeFilter === 'assignment' && paper.type === 'assignment') ||
+                    (typeFilter === 'preprint' && paper.type === 'preprint') ||
+                    (typeFilter === 'published' && paper.type === 'published');
+                
+                const matchSubject = !subjectFilter || paper.subject === subjectFilter;
+
+                return matchSearch && matchType && matchSubject;
+            })
+
+            renderPapers(filtered);
+        }
+
+        // Initialization
+        window.onload = () => {
+            renderPapers(papers);
+        }
+
+        // Event Listeners
+        document.getElementById('searchInput').addEventListener('input', filterPapers);
+        document.getElementById('typeFilter').addEventListener('change', filterPapers);
+        document.getElementById('subjectFilter').addEventListener('change', filterPapers);
+    </script>
 </body>
 </html>
