@@ -10,13 +10,6 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         body { font-family: 'Inter', system-ui, sans-serif; }
         
-        .pdf-container {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #e5e7eb;
-            background: #f8fafc;
-        }
-
         .card-hover:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -245,10 +238,7 @@
         // ======================
         function showAbout() {
             const container = document.getElementById('mainContent');
-            // Hide search bar
             document.getElementById('searchSection').classList.add('hidden');
-            
-            // Update nav state
             updateNavState('about');
 
             container.innerHTML = `
@@ -326,11 +316,9 @@
         // ======================
         
         function updateNavState(activeId) {
-            // Reset all nav styles
             const links = document.querySelectorAll('.nav-link');
             links.forEach(l => l.classList.remove('text-blue-600', 'font-bold'));
             
-            // Highlight active link
             if(activeId === 'about') {
                 document.getElementById('nav-about').classList.add('text-blue-600', 'font-bold');
             } else if (activeId === 'browse') {
@@ -341,12 +329,12 @@
         function showDetail(paper) {
             currentPaper = paper;
 
-            // 1. 基础信息填充
+            // Fill Metadata
             document.getElementById('modalTitle').textContent = paper.title;
             document.getElementById('modalAuthors').textContent = paper.authors;
             document.getElementById('modalAbstract').textContent = paper.abstract;
 
-            // 2. 类型标签颜色处理
+            // Fill Type Label
             const typeEl = document.getElementById('modalType');
             if (paper.type === 'preprint') {
                 typeEl.textContent = 'PREPRINT';
@@ -359,7 +347,7 @@
                 typeEl.className = 'text-xs font-bold uppercase tracking-widest text-blue-600';
             }
 
-            // 3. 关键词渲染
+            // Fill Keywords
             const kwContainer = document.getElementById('modalKeywords');
             kwContainer.innerHTML = '';
             paper.keywords.forEach(kw => {
@@ -369,22 +357,19 @@
                 kwContainer.appendChild(span);
             })
 
-            // 4. 版本历史渲染
+            // Fill Versions
             const verContainer = document.getElementById('modalVersions');
             verContainer.innerHTML = '';
             paper.versions.forEach(v => {
                 const div = document.createElement('div');
                 div.className = 'flex items-center gap-3 bg-zinc-50 rounded-2xl px-4 py-3 border border-zinc-100';
-                // 根据版本号简单判断图标
-                const icon = v.toLowerCase().includes('doc') ? '📝' : '📄'; 
-                div.innerHTML = `<div class="text-zinc-400 text-sm">${icon}</div><div class="text-sm font-medium text-zinc-700">${v}</div>`;
+                div.innerHTML = `<div class="text-zinc-400 text-sm">📄</div><div class="text-sm font-medium text-zinc-700">${v}</div>`;
                 verContainer.appendChild(div);
             })
 
-            // 5. 管理员备注
             document.getElementById('modalAdminNote').textContent = paper.adminNote || 'No administrator note available.';
 
-            // 6. 代码下载按钮显隐
+            // Code Button Logic
             const codeBtn = document.getElementById('codeDownloadBtn');
             if (paper.hasCode) {
                 codeBtn.classList.remove('hidden');
@@ -393,68 +378,28 @@
                 codeBtn.classList.add('hidden');
             }
 
-            // ============================================================
-            // 7. 【核心修改】文件类型兼容处理 (PDF vs DOCX)
-            // ============================================================
-            
-            // 获取文件后缀名 (例如: 'pdf', 'docx')
-            const fileUrl = paper.pdfUrl || "";
-            const fileExt = fileUrl.split('.').pop().toLowerCase();
-            const downloadBtn = document.querySelector('#detailModal button[onclick="downloadCurrent()"]');
-            const viewer = document.getElementById('pdfViewer');
-
-            // --- A. 更新下载按钮样式和文字 ---
-            if (fileExt === 'docx' || fileExt === 'doc') {
-                // Word 文档样式
-                downloadBtn.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Download Word
-                `;
-                // 可选：给 Word 文档换个按钮颜色区分
-                downloadBtn.className = "flex items-center gap-x-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-2.5 rounded-2xl text-sm font-medium transition-colors";
-            } else {
-                // 默认 PDF 样式
-                downloadBtn.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v-4m0 0l4 4m-4-4l4-4m12 8v-8" />
-                    </svg>
-                    Download PDF
-                `;
-                downloadBtn.className = "flex items-center gap-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-2xl text-sm font-medium transition-colors";
-            }
-
-            // --- B. 预览器逻辑 (使用 Google Docs Viewer 兼容 Word) ---
-            
-            // 构建 Google Viewer URL
-            // 注意：如果是相对路径 (如 papers/xxx.docx)，在本地无法被 Google 访问。
-            // 部署到 GitHub Pages 后，相对路径会自动基于域名解析，通常可以工作。
-            // 为了稳健性，这里直接传入原始 URL。
-            
-            if (['pdf', 'docx', 'doc', 'pptx', 'ppt'].includes(fileExt)) {
-                // 使用 Google Docs Viewer 嵌入预览
-                viewer.innerHTML = `
-                    <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(paper.pdfUrl)}&embedded=true" 
-                            class="w-full h-full border-0 rounded-xl bg-zinc-100" 
-                            frameborder="0"
-                            onload="this.style.opacity=1"></iframe>
-                    <div class="text-center mt-2 text-xs text-zinc-400">Powered by Google Docs Viewer</div>
-                `;
-            } else {
-                // 不支持预览的格式 (如 zip, rar 等)
-                viewer.innerHTML = `
-                    <div class="flex flex-col items-center justify-center h-full text-zinc-400">
-                        <div class="text-6xl mb-4">📁</div>
-                        <div class="text-lg font-medium text-zinc-600">Preview not available</div>
-                        <div class="text-sm">Please download the file to view its content.</div>
-                    </div>
-                `;
-            }
-
-            // 打开模态框
+            // Show Modal
             document.getElementById('detailModal').classList.remove('hidden');
             document.getElementById('detailModal').classList.add('flex');
+
+            // --- PDF Viewer Logic (Updated for Local Files) ---
+            const viewer = document.getElementById('pdfViewer');
+            const isRemote = paper.pdfUrl.startsWith('http') || paper.pdfUrl.startsWith('https');
+
+            if (isRemote) {
+                // For remote URLs (like arXiv), use Google Docs Viewer for compatibility
+                viewer.innerHTML = `
+                    <iframe src="https://docs.google.com/viewer?url=${encodeURIComponent(paper.pdfUrl)}&embedded=true" 
+                            class="w-full h-full border-0 rounded-xl" frameborder="0"></iframe>
+                `;
+            } else {
+                // For local files (e.g., /papers/demo.pdf), use native browser iframe
+                // This resolves the issue where Google Docs cannot access local/relative paths
+                viewer.innerHTML = `
+                    <iframe src="${paper.pdfUrl}" 
+                            class="w-full h-full border-0 rounded-xl" frameborder="0"></iframe>
+                `;
+            }
         }
 
         function closeModal() {
@@ -519,4 +464,3 @@
     </script>
 </body>
 </html>
-
