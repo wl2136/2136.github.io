@@ -72,19 +72,19 @@ const platformConfig = {
         },
         {
             "id": 5,
-            "title": "The Application of Cryogenic Carbon Capture Technology on the Dual-Fuel Ship through the Utilisation of LNG Cold Potential",
-            "authors": "Sergejus Lebedevas; Audrius Malūkas",
+            "title": "Highly accurate protein structure prediction with AlphaFold",
+            "authors": "John Jumper; Richard Evans; Alexander Pritzel; Tim Green; Michael Figurnov; Olaf Ronneberger; Kathryn Tunyasuvunakool; Russ Bates; Augustin Žídek; Anna Potapenko; Alexey Bridgland; Clemens Meyer; Simon A. A. Kohl; Andrew J. Ballard; Andrew Cowie; Bernardino Romera-Paredes; Stanislav Nikolov; Rishub Jain; Jonas Adler; Trevor Back; Stig Petersen; David Silver; Koray Kavukcuoglu; Demis Hassabis",
             "type": "published",
-            "subject": "physics",
-            "abstract": "This research experimentally and computationally evaluates cryogenic carbon capture technology on a dual-fuel ship by effectively utilizing LNG cold potential. The study investigates energy balance between LNG regasification and combustion cycles on an FSRU-type vessel, and quantifies CO2 capture ratios and energy requirements under different fuel conditions, demonstrating an informative foundation for practical implementation of cryogenic carbon capture in maritime decarbonization.", 
-            "keywords": ["Cryogenic Carbon Capture", "LNG Cold Potential", "Maritime Decarbonization", "Dual-Fuel Ship", "Energy Balance"],
-            "pdfUrl": "https://www.mdpi.com/2077-1312/12/2/217/pdf",
+            "subject": "biology",
+            "abstract": "This paper presents AlphaFold, a deep learning system capable of predicting protein three-dimensional structures with near-experimental accuracy. By integrating attention-based neural networks with evolutionary, physical, and geometric constraints, AlphaFold achieved unprecedented performance in the CASP14 competition, representing a major breakthrough in computational structural biology.",
+            "keywords": ["AlphaFold", "Protein Structure Prediction", "Deep Learning", "Structural Biology"],
+            "pdfUrl": "https://www.nature.com/articles/s41586-021-03819-2.pdf",
             "hasCode": false,
             "codeUrl": "",
             "downloadCount": 0,
-            "date": "2024-01-25",
-            "versions": ["Version of Record (2024)"],
-            "adminNote": "Published open access in Journal of Marine Science and Engineering (JMSE), 2024. :contentReference[oaicite:1]{index=1}"
+            "date": "2021-07-15",
+            "versions": ["Version of Record (2021)"],
+            "adminNote": "Published in Nature. Landmark work establishing state-of-the-art protein structure prediction accuracy."
         },
         {
             "id": 6,
@@ -101,6 +101,22 @@ const platformConfig = {
             "date": "2025-11-17",
             "versions": ["Version of Record (2025)"],
             "adminNote": "Published open access in *Scientific Reports*, 2025. :contentReference[oaicite:2]{index=2}"
+        },
+        {
+            "id": 13,
+            "title": "Techno-economic assessment of ship-based carbon capture systems for maritime decarbonization",
+            "authors": "Konstantinos F. Nikas; Apostolos D. Vassalos; Christos A. Frangopoulos",
+            "type": "published",
+            "subject": "physics",
+            "abstract": "This study investigates ship-based carbon capture systems as a mitigation pathway for maritime greenhouse gas emissions. Detailed process modeling and techno-economic analysis are conducted to assess energy penalties, capture efficiency, and cost implications under multiple operational scenarios, providing quantitative guidance for low-carbon shipping strategies.",
+            "keywords": ["Ship-Based Carbon Capture", "Maritime Decarbonization", "Techno-Economic Analysis", "CO₂ Capture"],
+            "pdfUrl": "https://www.sciencedirect.com/science/article/pii/S0306261921006233/pdfft",
+            "hasCode": false,
+            "codeUrl": "",
+            "downloadCount": 0,
+            "date": "2021-10-01",
+            "versions": ["Version of Record (2021)"],
+            "adminNote": "Published in Applied Energy (Elsevier). Influential study on the feasibility of onboard CCS for shipping."
         }
     ],
 
