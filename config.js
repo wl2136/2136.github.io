@@ -69,6 +69,38 @@ const platformConfig = {
             "date": "2024-02-25",
             "versions": ["v1.0 (2024-02-25)"],
             "adminNote": "Course design project. The topic is aligned with a later Open Access journal publication in International Journal of Low-Carbon Technologies (2024)."
+        },
+        {
+            "id": 5,
+            "title": "The Application of Cryogenic Carbon Capture Technology on the Dual-Fuel Ship through the Utilisation of LNG Cold Potential",
+            "authors": "Sergejus Lebedevas; Audrius Malūkas",
+            "type": "published",
+            "subject": "physics",
+            "abstract": "This research experimentally and computationally evaluates cryogenic carbon capture technology on a dual-fuel ship by effectively utilizing LNG cold potential. The study investigates energy balance between LNG regasification and combustion cycles on an FSRU-type vessel, and quantifies CO2 capture ratios and energy requirements under different fuel conditions, demonstrating an informative foundation for practical implementation of cryogenic carbon capture in maritime decarbonization.", 
+            "keywords": ["Cryogenic Carbon Capture", "LNG Cold Potential", "Maritime Decarbonization", "Dual-Fuel Ship", "Energy Balance"],
+            "pdfUrl": "https://doi.org/10.3390/jmse12020217",
+            "hasCode": false,
+            "codeUrl": "",
+            "downloadCount": 0,
+            "date": "2024-01-25",
+            "versions": ["Version of Record (2024)"],
+            "adminNote": "Published open access in Journal of Marine Science and Engineering (JMSE), 2024. :contentReference[oaicite:1]{index=1}"
+        },
+        {
+            "id": 6,
+            "title": "Low-energy phase-change absorbents for efficient onboard CO₂ capture in the maritime sector",
+            "authors": "Wenhao Jiang; Jiabao Hu; Sun Chengqi; Shoujun Zhang; Wei Wang; Kun Zhang",
+            "type": "published",
+            "subject": "physics",
+            "abstract": "This paper investigates phase-change absorbent systems designed for shipborne CO₂ capture. By screening combinations of amines and phase separation agents, the study identifies absorbents that achieve enhanced CO₂ absorption/desorption performance with significantly reduced regeneration energy consumption, showing promise for improving energy efficiency in onboard carbon capture applications within the maritime sector.", 
+            "keywords": ["Phase-change Absorbents", "Onboard CO₂ Capture", "Maritime Decarbonization", "Energy Efficiency", "Maritime Engineering"],
+            "pdfUrl": "https://doi.org/10.1038/s41598-025-24126-0",
+            "hasCode": false,
+            "codeUrl": "",
+            "downloadCount": 0,
+            "date": "2025-11-17",
+            "versions": ["Version of Record (2025)"],
+            "adminNote": "Published open access in *Scientific Reports*, 2025. :contentReference[oaicite:2]{index=2}"
         }
     ],
 
