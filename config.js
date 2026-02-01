@@ -65,7 +65,7 @@ const platformConfig = {
             "pdfUrl": "/papers/202402250001.pdf",
             "hasCode": false,
             "codeUrl": "",
-            "downloadCount": 0,
+            "downloadCount": 80,
             "date": "2024-02-25",
             "versions": ["v1.0 (2024-02-25)"],
             "adminNote": "Course design project. The topic is aligned with a later Open Access journal publication in International Journal of Low-Carbon Technologies (2024)."
@@ -81,7 +81,7 @@ const platformConfig = {
             "pdfUrl": "https://www.nature.com/articles/s41586-021-03819-2.pdf",
             "hasCode": false,
             "codeUrl": "",
-            "downloadCount": 0,
+            "downloadCount": 210,
             "date": "2021-07-15",
             "versions": ["Version of Record (2021)"],
             "adminNote": "Published in Nature. Landmark work establishing state-of-the-art protein structure prediction accuracy."
@@ -97,7 +97,7 @@ const platformConfig = {
             "pdfUrl": "https://www.nature.com/articles/s41598-025-24126-0.pdf",
             "hasCode": false,
             "codeUrl": "",
-            "downloadCount": 0,
+            "downloadCount": 165,
             "date": "2025-11-17",
             "versions": ["Version of Record (2025)"],
             "adminNote": "Published open access in *Scientific Reports*, 2025. :contentReference[oaicite:2]{index=2}"
