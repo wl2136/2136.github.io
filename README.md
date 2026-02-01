@@ -1,9 +1,16 @@
+# Academic Sharing Platform
 
-# Renewable Product AND TCSC-AI Research Institute Website
+This is a **static website** designed for academic repositories, research labs, or preprint servers. It is built using **HTML5**, **JavaScript**, and **Tailwind CSS** (via CDN).
 
-This is a **pure static website template** designed for research institutes or academic individuals. It is built using HTML, CSS, and JavaScript, requiring no backend server (like Node.js or Python), making it perfect for deployment on **GitHub Pages**.
+It requires **no backend server** (like Node.js, Python, or PHP), making it perfect for instant deployment on **GitHub Pages**, Netlify, or Vercel.
 
-The core feature of this project is its **Data-Driven Architecture**: almost all website content (Publications, Team, Research Focus, etc.) is managed via a single configuration file (`config.js`). You do not need to edit HTML code to update your content.
+## ✨ Key Features
+
+* **Data-Driven**: All content is managed via a single `config.js` file.
+* **Zero Build Step**: Uses Tailwind via CDN for instant development.
+* **Search & Filter**: Built-in real-time search by title, author, or abstract.
+* **PDF Integration**: Integrated PDF viewer (via Google Docs Viewer or PDF.js) and download tracking UI.
+* **Responsive**: Fully mobile-friendly layout.
 
 ## 📂 Project Structure
 
@@ -12,10 +19,8 @@ Ensure your folder structure looks like this:
 ```text
 my-website/
 │
-├── index.html       # Main website file (Structure, Navigation, Layout)
-├── style.css        # Stylesheet (Colors, Layouts, Visuals)
-├── script.js        # Logic script (Renders content from config.js)
-├── config.js        # 【Core Config】Manage ALL your content here
+├── index.html       # Main website structure (Tailwind classes & Layout)
+├── config.js        # 【Core Config】Manage ALL data (Papers, Team, Contact) here
 ├── README.md        # Documentation
 │
 └── papers/          # (Optional) Folder to store local PDF files
@@ -24,130 +29,98 @@ my-website/
 
 ```
 
+*(Note: `style.css` and `script.js` are no longer strictly necessary as logic is embedded or loaded from `config.js` and styling is handled by Tailwind, but you can keep them for custom overrides.)*
+
 ---
 
 ## 🚀 Quick Start
 
-1. **Download or Clone** this project to your local machine.
-2. Double-click `index.html` to open it in your browser. You will see the website running immediately.
+1. **Download** this project folder.
+2. Double-click `index.html` to open it in your browser.
+3. You will see the website running immediately.
 
 ---
 
 ## 📝 How to Manage Content
 
-You can control the entire website content by editing **`config.js`**. The file is divided into 5 main sections:
+You can control the entire website content by editing **`config.js`**. The configuration is wrapped in a single object called `platformConfig`.
 
-### 1. About the Institute (`aboutContent`)
+### 1. Papers & Resources (`platformConfig.papers`)
 
-This is an array of strings. Each string represents a paragraph in the "About" section. You can use HTML tags like `<strong>` for bold text.
+This is the main database. Add your research items here.
 
-```javascript
-const aboutContent = [
-    "<strong>My Institute</strong> is a great place...", // Paragraph 1
-    "We focus on AI and Energy..."                     // Paragraph 2
-];
-
-```
-
-### 2. Research Focus (`researchFocus`)
-
-Define your key research areas here.
-
-* `icon`: An emoji or text icon.
-* `title`: The title of the card.
-* `description`: A short description.
+* `type`: Options are `'preprint'`, `'published'`, or `'assignment'`.
+* `subject`: Options are `'computer'`, `'physics'`, `'biology'`, `'mathematics'` (matches the filter dropdown).
+* `pdfUrl`: Can be a local path (`papers/doc.pdf`) or a remote URL (`https://arxiv.org/...`).
 
 ```javascript
-const researchFocus = [
+papers: [
     {
-        icon: "🌱",
-        title: "Renewable Products",
-        description: "Research on sustainable development..."
+        id: 1,
+        title: "Optimization of Image Classification Algorithms",
+        authors: "Wei Zhang, Na Li",
+        type: "preprint",       // affects badge color
+        subject: "computer",    // affects filtering
+        abstract: "This paper proposes...",
+        keywords: ["Deep Learning", "ResNet"],
+        pdfUrl: "[https://arxiv.org/pdf/2305.12345.pdf](https://arxiv.org/pdf/2305.12345.pdf)",
+        hasCode: true,
+        codeUrl: "[https://github.com/example/repo](https://github.com/example/repo)",
+        downloadCount: 1248,
+        date: "2025-12-15",
+        versions: ["v1.0 (2025-10-10)"],
+        adminNote: "Passed initial review."
     }
-];
+    // ... add more papers here
+],
 
 ```
 
-### 3. Publications (`paperList`)
+### 2. About Us (`platformConfig.about`)
 
-Manage your papers and projects.
-
-* `title`: Paper title.
-* `date`: Publication date (e.g., "2026-01-15").
-* `file`: Direct link to the PDF.
-* **Remote**: `"https://arxiv.org/..."`
-* **Local**: `"papers/filename.pdf"`
-
-
-* `code`: GitHub URL. Leave empty `""` to hide the button.
+Define the content for the "About" tab.
 
 ```javascript
-const paperList = [
-    {
-        title: "Adaptive Gradient-Field Poisson Blending",
-        date: "2025-12-20",
-        file: "[https://arxiv.org/pdf/2101.00001.pdf](https://arxiv.org/pdf/2101.00001.pdf)", 
-        code: "[https://github.com/your-username/project-2](https://github.com/your-username/project-2)"
-    },
-    {
-        title: "My Local Paper",
-        date: "2026-01-15",
-        file: "papers/my-file.pdf", 
-        code: ""
-    }
-];
+about: {
+    title: "About The Platform",
+    paragraphs: [
+        "<strong>Academic Sharing Platform</strong> is an independent repository...",
+        "Paragraph 2 content here..."
+    ]
+},
 
 ```
 
-### 4. Collaboration (`collaborationList`)
+### 3. Research Team (`platformConfig.team`)
 
-Manage partnership opportunities.
-
-* `link`: (Optional) URL to navigate to when clicked.
-* `scrollTarget`: Set to `true` if the link is an ID on the same page (e.g., `#team`).
+Manage team member cards. You can customize the avatar background color using Tailwind classes.
 
 ```javascript
-const collaborationList = [
+team: [
     {
-        title: "Academic Partnerships",
-        description: "We collaborate with universities..."
-    },
-    {
-        title: "Join Us",
-        description: "View our open positions.",
-        link: "#contact",
-        linkText: "Contact Us",
-        scrollTarget: true
+        name: "Dr. Faraji Hamid",
+        role: "Platform Director",
+        location: "Istanbul, Turkey",
+        avatarColor: "bg-blue-100 text-blue-600" // Tailwind classes
     }
-];
+],
 
 ```
 
-### 5. Research Team (`teamMembers`)
+### 4. Contact Info (`platformConfig.contact`)
 
-Manage your team members.
-
-* `department`: (Optional) Department name.
+Update the contact section at the bottom of the "About" page.
 
 ```javascript
-const teamMembers = [
-    {
-        name: "Dr. John Doe",
-        role: "Lead Researcher",
-        department: "AI Division",
-        location: "Tokyo, Japan"
-    }
-];
+contact: {
+    title: "Contact Us",
+    description: "For inquiries about research submission...",
+    email: "contact@academic-sharing.org",
+    address: "123 Academic Avenue, Innovation District",
+    note: "We typically respond within 24-48 hours."
+}
 
 ```
-
----
-
-## 🎨 How to Edit Static Layout
-
-To change the basic website structure, navigation menu items, or the "Contact Us" static text at the bottom, you will need to edit **`index.html`** directly.
-
-However, 90% of the content is now managed dynamically via `config.js`.
 
 ---
 
@@ -157,29 +130,32 @@ However, 90% of the content is now managed dynamically via `config.js`.
 2. **Go to Settings**: Click the **Settings** tab at the top of your repository.
 3. **Find Pages**: In the left sidebar, click on **Pages**.
 4. **Select Branch**: Under "Build and deployment", select the `main` (or `master`) branch and click **Save**.
-5. **Wait**: Wait about 1-2 minutes. GitHub will provide a link (usually `https://your-username.github.io/repo-name/`). Click it to visit your site.
+5. **Wait**: Wait about 1-2 minutes. GitHub will provide a link. Click it to visit your site.
 
 ---
 
 ## ⚠️ FAQ
 
 **Q: I updated `config.js`, but the website didn't change?**
-A: This is usually due to browser caching. Please try a **Hard Refresh**:
+A: Browser caching often keeps the old JavaScript file. Please perform a **Hard Refresh**:
 
-* **Windows/Linux**: Press `Ctrl + F5`
-* **Mac**: Press `Command + Shift + R`
+* **Windows/Linux**: `Ctrl + F5`
+* **Mac**: `Cmd + Shift + R`
 
-**Q: The "Paper" button shows a 404 Not Found error?**
-A: Please check:
+**Q: Why do I see a "Google Docs Viewer" error for local PDFs?**
+A: The template uses Google Docs Viewer for previews. This works great for remote URLs (like arXiv). For **local files** (e.g., `papers/test.pdf`), Google cannot access files on your hard drive (`file://`).
 
-1. If it's a local file, ensure the file is actually inside the `papers/` folder and the filename matches exactly (case-sensitive) with what is in `config.js`.
-2. If it's a remote link, ensure the URL is correct and accessible.
+* **Solution**: Deploy the site to GitHub Pages. Once online, Google can access your files via the public URL.
 
-**Q: Do I need to install Node.js?**
-A: **No**. This is a pure static project. It runs on any computer with a browser.
+**Q: How do I change the colors?**
+A: The site uses **Tailwind CSS**. You can change colors in `config.js` (for team avatars) or by finding-and-replacing classes in `index.html` (e.g., replace `bg-blue-600` with `bg-red-600`).
 
 ---
 
 ## 📜 License
 
 [Add your license here, e.g., MIT License]
+
+```
+
+```
