@@ -62,7 +62,7 @@ const platformConfig = {
             "subject": "physics",
             "abstract": "This course design explores an integrated maritime energy system that combines waste thermal energy from natural gas engines with the cold energy released during LNG regasification to satisfy the heat, power, and cooling requirements of onboard carbon capture and storage (CCS) systems. The project emphasizes engineering system configuration, performance enhancement strategies, and a comprehensive 4E (energy, exergy, economic, and environmental) analysis to evaluate efficiency improvements and decarbonization potential.",
             "keywords": ["Maritime Decarbonization", "Carbon Capture and Storage", "LNG Cold Energy", "Natural Gas Engine", "4E Analysis"],
-            "pdfUrl": "https://github.com/wl2136/2136.github.io/blob/main/papers/202402250001.docx",
+            "pdfUrl": "/papers/202402250001.pdf",
             "hasCode": false,
             "codeUrl": "",
             "downloadCount": 0,
