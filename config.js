@@ -53,6 +53,22 @@ const platformConfig = {
             date: "2025-11-05",
             versions: ["v1.0 (2025-11-05)"],
             adminNote: "Outstanding course assignment. Code includes complete training scripts."
+        },
+        {
+            "id": 4,
+            "title": "Utilizing the Thermal Energy from Natural Gas Engines and the Cold Energy of LNG to Satisfy the Heat, Power, and Cooling Demands of Carbon Capture and Storage in Maritime Decarbonization: Engineering, Enhancement, and 4E Analysis",
+            "authors": "Student name: an unnamed individual (Supervisor: Ali Basem)",
+            "type": "assignment",
+            "subject": "physics",
+            "abstract": "This course design explores an integrated maritime energy system that combines waste thermal energy from natural gas engines with the cold energy released during LNG regasification to satisfy the heat, power, and cooling requirements of onboard carbon capture and storage (CCS) systems. The project emphasizes engineering system configuration, performance enhancement strategies, and a comprehensive 4E (energy, exergy, economic, and environmental) analysis to evaluate efficiency improvements and decarbonization potential.",
+            "keywords": ["Maritime Decarbonization", "Carbon Capture and Storage", "LNG Cold Energy", "Natural Gas Engine", "4E Analysis"],
+            "pdfUrl": "https://doi.org/10.1093/ijlct/ctae160",
+            "hasCode": false,
+            "codeUrl": "",
+            "downloadCount": 0,
+            "date": "2024-02-25",
+            "versions": ["v1.0 (2024-02-25)"],
+            "adminNote": "Course design project. The topic is aligned with a later Open Access journal publication in International Journal of Low-Carbon Technologies (2024)."
         }
     ],
 
