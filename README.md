@@ -1,8 +1,16 @@
-# Renewable Product AND TCSC-AI Research Institute Website
+# Academic Sharing Platform
 
-This is a **pure static website template** designed for research institutes or academic individuals. It is built using HTML, CSS, and JavaScript, requiring no backend server (like Node.js or Python), making it perfect for deployment on **GitHub Pages**.
+This is a **static website** designed for academic repositories, research labs, or preprint servers. It is built using **HTML5**, **JavaScript**, and **Tailwind CSS** (via CDN).
 
-The core feature of this project is the **Dynamic Publications List**: simply edit a single configuration file (`config.js`), and the "Publications" section on the website will update automatically. It supports both local PDF files and remote links (e.g., arXiv).
+It requires **no backend server** (like Node.js, Python, or PHP), making it perfect for instant deployment on **GitHub Pages**, Netlify, or Vercel.
+
+## ✨ Key Features
+
+* **Data-Driven**: All content is managed via a single `config.js` file.
+* **Zero Build Step**: Uses Tailwind via CDN for instant development.
+* **Search & Filter**: Built-in real-time search by title, author, or abstract.
+* **PDF Integration**: Integrated PDF viewer (via Google Docs Viewer or PDF.js) and download tracking UI.
+* **Responsive**: Fully mobile-friendly layout.
 
 ## 📂 Project Structure
 
@@ -11,10 +19,8 @@ Ensure your folder structure looks like this:
 ```text
 my-website/
 │
-├── index.html       # Main website file (Structure, Navigation, Content)
-├── style.css        # Stylesheet (Colors, Layouts, Visuals)
-├── script.js        # Logic script (Animations, Rendering the paper list)
-├── config.js        # 【Core Config】Manage your publications data here
+├── index.html       # Main website structure (Tailwind classes & Layout)
+├── config.js        # 【Core Config】Manage ALL data (Papers, Team, Contact) here
 ├── README.md        # Documentation
 │
 └── papers/          # (Optional) Folder to store local PDF files
@@ -23,83 +29,98 @@ my-website/
 
 ```
 
+*(Note: `style.css` and `script.js` are no longer strictly necessary as logic is embedded or loaded from `config.js` and styling is handled by Tailwind, but you can keep them for custom overrides.)*
+
 ---
 
 ## 🚀 Quick Start
 
-1. **Download or Clone** this project to your local machine.
-2. Double-click `index.html` to open it in your browser. You will see the website running immediately.
+1. **Download** this project folder.
+2. Double-click `index.html` to open it in your browser.
+3. You will see the website running immediately.
 
 ---
 
-## 📝 How to Manage Publications
+## 📝 How to Manage Content
 
-This is the main feature of the project. You do not need to touch the HTML code; just edit the `config.js` file.
+You can control the entire website content by editing **`config.js`**. The configuration is wrapped in a single object called `platformConfig`.
 
-### 1. Open `config.js`
+### 1. Papers & Resources (`platformConfig.papers`)
 
-Open the file using a text editor (like Notepad) or a code editor (like VS Code).
+This is the main database. Add your research items here.
 
-### 2. Add or Edit Entries
-
-Add new objects to the `paperList` array. Each paper object contains three properties:
-
-* `title`: The title displayed on the list.
-* `file`: The link opened when the "Paper" button is clicked.
-* **Remote Link**: Enter the full URL (e.g., `https://arxiv.org/pdf/xxx`).
-* **Local File**: Enter the relative path (e.g., `papers/my-file.pdf`), ensuring the file exists in the `papers` folder.
-
-
-* `code`: The link opened when the "Code" button is clicked. If left empty `""`, the button will automatically hide.
-
-### ✅ Configuration Examples
+* `type`: Options are `'preprint'`, `'published'`, or `'assignment'`.
+* `subject`: Options are `'computer'`, `'physics'`, `'biology'`, `'mathematics'` (matches the filter dropdown).
+* `pdfUrl`: Can be a local path (`papers/doc.pdf`) or a remote URL (`https://arxiv.org/...`).
 
 ```javascript
-const paperList = [
-    // Example 1: Remote Link (e.g., arXiv)
+papers: [
     {
-        title: "Adaptive Gradient-Field Poisson Blending for Video Synthesis",
-        file: "[https://arxiv.org/pdf/2101.00001.pdf](https://arxiv.org/pdf/2101.00001.pdf)", 
-        code: "[https://github.com/your-username/project-2](https://github.com/your-username/project-2)"
-    },
-
-    // Example 2: Local File (File must be in the 'papers' folder)
-    {
-        title: "Variational Causal-Graph Enhanced Network",
-        file: "papers/my-local-paper.pdf",
-        code: "[https://github.com/your-username/project-1](https://github.com/your-username/project-1)"
-    },
-
-    // Example 3: No Code Link (The Code button will be hidden)
-    {
-        title: "A Pure Theoretical Review of TCSC-AI",
-        file: "[https://example.com/paper.pdf](https://example.com/paper.pdf)", 
-        code: "" 
+        id: 1,
+        title: "Optimization of Image Classification Algorithms",
+        authors: "Wei Zhang, Na Li",
+        type: "preprint",       // affects badge color
+        subject: "computer",    // affects filtering
+        abstract: "This paper proposes...",
+        keywords: ["Deep Learning", "ResNet"],
+        pdfUrl: "[https://arxiv.org/pdf/2305.12345.pdf](https://arxiv.org/pdf/2305.12345.pdf)",
+        hasCode: true,
+        codeUrl: "[https://github.com/example/repo](https://github.com/example/repo)",
+        downloadCount: 1248,
+        date: "2025-12-15",
+        versions: ["v1.0 (2025-10-10)"],
+        adminNote: "Passed initial review."
     }
-];
+    // ... add more papers here
+],
 
 ```
 
----
+### 2. About Us (`platformConfig.about`)
 
-## 🎨 How to Edit Content
+Define the content for the "About" tab.
 
-To change static text like "About Us," "Team Members," or "Contact Info," you need to edit `index.html` directly.
-
-### Editing Team Members
-
-Find the `<section id="team">` part in the HTML file:
-
-```html
-<div class="team-member">
-    <div class="member-icon">👤</div>
-    <h3>Member Name</h3> <p class="member-role">Position/Role</p> <p class="member-location">📍 Location</p> </div>
+```javascript
+about: {
+    title: "About The Platform",
+    paragraphs: [
+        "<strong>Academic Sharing Platform</strong> is an independent repository...",
+        "Paragraph 2 content here..."
+    ]
+},
 
 ```
 
-### Editing Contact Info
+### 3. Research Team (`platformConfig.team`)
 
-Find the `<section id="contact">` part and edit the text content directly.
+Manage team member cards. You can customize the avatar background color using Tailwind classes.
+
+```javascript
+team: [
+    {
+        name: "Dr. Faraji Hamid",
+        role: "Platform Director",
+        location: "Istanbul, Turkey",
+        avatarColor: "bg-blue-100 text-blue-600" // Tailwind classes
+    }
+],
+
+```
+
+### 4. Contact Info (`platformConfig.contact`)
+
+Update the contact section at the bottom of the "About" page.
+
+```javascript
+contact: {
+    title: "Contact Us",
+    description: "For inquiries about research submission...",
+    email: "contact@academic-sharing.org",
+    address: "123 Academic Avenue, Innovation District",
+    note: "We typically respond within 24-48 hours."
+}
+
+```
 
 ---
 
@@ -109,27 +130,32 @@ Find the `<section id="contact">` part and edit the text content directly.
 2. **Go to Settings**: Click the **Settings** tab at the top of your repository.
 3. **Find Pages**: In the left sidebar, click on **Pages**.
 4. **Select Branch**: Under "Build and deployment", select the `main` (or `master`) branch and click **Save**.
-5. **Wait**: Wait about 1-2 minutes. GitHub will provide a link (usually `https://your-username.github.io/repo-name/`). Click it to visit your site.
+5. **Wait**: Wait about 1-2 minutes. GitHub will provide a link. Click it to visit your site.
 
 ---
 
 ## ⚠️ FAQ
 
 **Q: I updated `config.js`, but the website didn't change?**
-A: This is usually due to browser caching. Please try a **Hard Refresh**:
+A: Browser caching often keeps the old JavaScript file. Please perform a **Hard Refresh**:
 
-* **Windows/Linux**: Press `Ctrl + F5`
-* **Mac**: Press `Command + Shift + R`
+* **Windows/Linux**: `Ctrl + F5`
+* **Mac**: `Cmd + Shift + R`
 
-**Q: The "Paper" button shows a 404 Not Found error?**
-A: Please check:
+**Q: Why do I see a "Google Docs Viewer" error for local PDFs?**
+A: The template uses Google Docs Viewer for previews. This works great for remote URLs (like arXiv). For **local files** (e.g., `papers/test.pdf`), Google cannot access files on your hard drive (`file://`).
 
-1. If it's a local file, ensure the file is actually inside the `papers/` folder and the filename matches exactly (case-sensitive) with what is in `config.js`.
-2. If it's a remote link, ensure the URL is correct and accessible.
+* **Solution**: Deploy the site to GitHub Pages. Once online, Google can access your files via the public URL.
 
-**Q: Do I need to install Node.js?**
-A: **No**. This is a pure static project. It runs on any computer with a browser.
+**Q: How do I change the colors?**
+A: The site uses **Tailwind CSS**. You can change colors in `config.js` (for team avatars) or by finding-and-replacing classes in `index.html` (e.g., replace `bg-blue-600` with `bg-red-600`).
 
 ---
 
 ## 📜 License
+
+[Add your license here, e.g., MIT License]
+
+```
+
+```
