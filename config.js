@@ -101,22 +101,6 @@ const platformConfig = {
             "date": "2025-11-17",
             "versions": ["Version of Record (2025)"],
             "adminNote": "Published open access in *Scientific Reports*, 2025. :contentReference[oaicite:2]{index=2}"
-        },
-        {
-            "id": 13,
-            "title": "Techno-economic assessment of ship-based carbon capture systems for maritime decarbonization",
-            "authors": "Konstantinos F. Nikas; Apostolos D. Vassalos; Christos A. Frangopoulos",
-            "type": "published",
-            "subject": "physics",
-            "abstract": "This study investigates ship-based carbon capture systems as a mitigation pathway for maritime greenhouse gas emissions. Detailed process modeling and techno-economic analysis are conducted to assess energy penalties, capture efficiency, and cost implications under multiple operational scenarios, providing quantitative guidance for low-carbon shipping strategies.",
-            "keywords": ["Ship-Based Carbon Capture", "Maritime Decarbonization", "Techno-Economic Analysis", "CO₂ Capture"],
-            "pdfUrl": "https://www.sciencedirect.com/science/article/pii/S0306261921006233/pdfft",
-            "hasCode": false,
-            "codeUrl": "",
-            "downloadCount": 0,
-            "date": "2021-10-01",
-            "versions": ["Version of Record (2021)"],
-            "adminNote": "Published in Applied Energy (Elsevier). Influential study on the feasibility of onboard CCS for shipping."
         }
     ],
 
